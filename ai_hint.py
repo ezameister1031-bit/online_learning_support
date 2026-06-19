@@ -7,7 +7,6 @@ def get_hint(problem, code):
     prompt = f"""
 あなたはプログラミング講師です。
 答えは出さずヒントのみ出してください。
-日本語で出力してください
 問題:
 {problem}
 
