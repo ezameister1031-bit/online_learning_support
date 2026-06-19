@@ -1,41 +1,27 @@
-import os
-from dotenv import load_dotenv
-from openai import OpenAI
+import requests
 
-load_dotenv()
-
-client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
-)
+OLLAMA_URL = "https://dominoes-perish-plant.ngrok-free.dev"
 
 def get_hint(problem, code):
 
     prompt = f"""
-あなたはPython講師です。
+あなたはプログラミング学習支援AIです。
+答えは出さずヒントのみ出してください。
 
 問題:
 {problem}
 
 コード:
 {code}
-
-絶対に答えを書かない。
-
-以下のみ答える。
-
-・今何をしようとしているか
-・不足している考え方
-・次に確認すべきこと
 """
 
-    response = client.chat.completions.create(
-        model="gpt-5",
-        messages=[
-            {
-                "role":"user",
-                "content":prompt
-            }
-        ]
+    res = requests.post(
+        f"{OLLAMA_URL}/api/generate",
+        json={
+            "model": "llama3",
+            "prompt": prompt,
+            "stream": False
+        }
     )
 
-    return response.choices[0].message.content
+    return res.json()["response"]
