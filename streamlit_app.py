@@ -1,5 +1,7 @@
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
+import io
+import contextlib
 
 st_autorefresh(interval=1000, key="idle_check")
 st.title("Python学習支援システム")
@@ -19,6 +21,21 @@ code = st_ace(
     height=400,
     auto_update=True
 )
+
+st.subheader("実行結果")
+if st.button("コード実行"):
+
+    output = io.StringIO()
+
+    try:
+        with contextlib.redirect_stdout(output):
+            exec(code)
+
+        st.subheader("実行結果")
+        st.code(output.getvalue())
+
+    except Exception as e:
+        st.error(f"実行エラー: {e}")
 
 from ai_hint import get_hint
 
