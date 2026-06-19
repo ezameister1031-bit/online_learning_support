@@ -16,7 +16,8 @@ from streamlit_ace import st_ace
 code = st_ace(
     language="python",
     theme="github",
-    height=400
+    height=400,
+    auto_update=True
 )
 
 from ai_hint import get_hint
