@@ -23,7 +23,7 @@ def get_hint(problem, code):
                 "prompt": prompt,
                 "stream": False
             },
-            timeout=30
+            timeout=60
         )
 
         data = res.json()
