@@ -16,7 +16,7 @@ def get_hint(problem, code):
 """
 
     try:
-        res = requests.post(
+    res = requests.post(
         f"{OLLAMA_URL}/api/generate",
         json={
             "model": "llama3",
