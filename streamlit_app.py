@@ -73,15 +73,13 @@ st.write(
 )
 
 IDLE_LIMIT = 30
-if idle_time > IDLE_LIMIT:
-
-    st.warning(
-        "悩んでいる？ヒントをあげるよ"
-    )
-
-    st.session_state.hint = get_hint(
-    problem,
-    code
-    )
-
-    st.info(st.session_state.hint)
+if "auto_hint_given" not in st.session_state:
+    st.session_state.auto_hint_given = False
+if idle_time > IDLE_LIMIT and not st.session_state.auto_hint_given:
+    st.warning("悩んでいる？ヒントをあげるよ")
+    st.session_state.hint = get_hint(problem, code)
+    st.session_state.auto_hint_given = True
+if code != st.session_state.last_code:
+    st.session_state.last_code = code
+    st.session_state.last_time = time.time()
+    st.session_state.auto_hint_given = False
