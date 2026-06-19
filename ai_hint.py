@@ -1,12 +1,10 @@
 import requests
 
-OLLAMA_URL = "https://dominoes-perish-plant.ngrok-free.dev"
-
-def get_hint(problem, code):
+def get_hint_ollama(problem, code):
 
     prompt = f"""
 あなたはプログラミング講師です。
-答えは出さずヒントのみ出してください。
+絶対に答えを出さずヒントだけ出してください。
 
 問題:
 {problem}
@@ -15,23 +13,13 @@ def get_hint(problem, code):
 {code}
 """
 
-    try:
-        res = requests.post(
-            f"{OLLAMA_URL}/api/generate",
-            json={
-                "model": "llama3",
-                "prompt": prompt,
-                "stream": False
-            },
-            timeout=60
-        )
+    response = requests.post(
+        "http://localhost:11434/api/generate",
+        json={
+            "model": "llama3",
+            "prompt": prompt,
+            "stream": False
+        }
+    )
 
-        st = res.status_code
-        data = res.json()
-        return str(data)
-
-        return data.get("response", "AIからの応答がありません")
-
-    except Exception as e:
-        return f"エラー: {str(e)}"
-
+    return response.json()["response"]
