@@ -1,10 +1,12 @@
 import requests
 
-def get_hint_ollama(problem, code):
+OLLAMA_URL = "https://dominoes-perish-plant.ngrok-free.dev"
+
+def get_hint(problem, code):
 
     prompt = f"""
-あなたはプログラミング講師です。
-絶対に答えを出さずヒントだけ出してください。
+あなたはプログラミング学習支援AIです。
+答えは出さずヒントのみ出してください。
 
 問題:
 {problem}
@@ -13,8 +15,8 @@ def get_hint_ollama(problem, code):
 {code}
 """
 
-    response = requests.post(
-        "http://localhost:11434/api/generate",
+    res = requests.post(
+        f"{OLLAMA_URL}/api/generate",
         json={
             "model": "llama3",
             "prompt": prompt,
@@ -22,4 +24,4 @@ def get_hint_ollama(problem, code):
         }
     )
 
-    return response.json()["response"]
+    return res.json()["response"]
