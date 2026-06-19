@@ -1,19 +1,16 @@
-# 🎈 Blank app template
+# 🧠 Python学習支援AI（Ollama版）
 
-A simple Streamlit app template for you to modify!
+Streamlit を使用して作成した、  
+**初心者向けPython学習支援アプリ**です。
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+コード入力と問題文をもとに、ローカルLLM（Ollama）を使用して  
+「答えを直接出さずにヒントだけを提示するAI学習支援」を行います。
 
-### How to run it on your own machine
+一定時間操作がない場合や、ヒントボタンを押した際にAIが動作し、  
+学習者の思考を妨げずに段階的なヒントを提供します。
 
-1. Install the requirements
+---
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+## 🌐 URL
 
-2. Run the app
-
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+以下のURLからアプリにアクセスできます（ngrok経由の場合）
