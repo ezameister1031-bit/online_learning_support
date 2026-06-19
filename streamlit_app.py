@@ -17,7 +17,8 @@ st.write("コード")
 code = st_ace(
     language="python",
     theme="github",
-    height=400
+    height=400,
+    key="code_editor"
 )
 
 # ヒントボタン
