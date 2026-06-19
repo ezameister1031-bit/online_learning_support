@@ -23,6 +23,8 @@ code = st_ace(
 )
 
 st.subheader("実行結果")
+if "run_output" not in st.session_state:
+    st.session_state.run_output = ""
 if st.button("コード実行"):
 
     output = io.StringIO()
@@ -31,11 +33,10 @@ if st.button("コード実行"):
         with contextlib.redirect_stdout(output):
             exec(code)
 
-        st.subheader("実行結果")
-        st.code(output.getvalue())
+        st.session_state.run_output = output.getvalue()
 
     except Exception as e:
-        st.error(f"実行エラー: {e}")
+        st.session_state.run_output = f"エラー: {e}"
 
 from ai_hint import get_hint
 
