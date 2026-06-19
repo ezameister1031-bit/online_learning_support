@@ -37,3 +37,5 @@ def get_hint(problem, code):
 
     except Exception as e:
         return f"エラー: {str(e)}"
+print("RAW:", res.text)
+print("STATUS:", res.status_code)
