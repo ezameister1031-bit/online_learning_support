@@ -106,7 +106,7 @@ Ollama（ローカルLLM）
 |streamlit_app.py|	メインUI|
 |ai_hint.py|	Ollamaとの通信処理|
 |requirements.txt|	依存ライブラリ|
-|(ngrok)	|外部公開用トンネル|
+|ngrok	|外部公開用トンネル|
 
 ---
 
