@@ -37,7 +37,11 @@ if st.button("コード実行"):
 
     except Exception as e:
         st.session_state.run_output = f"エラー: {e}"
+st.subheader("実行結果")
 
+if st.session_state.run_output:
+    st.code(st.session_state.run_output)
+    
 from ai_hint import get_hint
 
 if st.button("ヒントをもらう"):
