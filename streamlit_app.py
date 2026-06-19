@@ -25,6 +25,8 @@ code = st_ace(
 st.subheader("実行結果")
 if "run_output" not in st.session_state:
     st.session_state.run_output = ""
+if "hint" not in st.session_state:
+    st.session_state.hint = ""
 if st.button("コード実行"):
 
     output = io.StringIO()
@@ -45,10 +47,9 @@ if st.session_state.run_output:
 from ai_hint import get_hint
 
 if st.button("ヒントをもらう"):
-    hint = get_hint(problem, code)
-
-    st.write(hint)
-
+    st.session_state.hint = get_hint(problem, code)
+if st.session_state.hint:
+    st.info(st.session_state.hint)
 import time
 if "last_code" not in st.session_state:
     st.session_state.last_code = ""
@@ -75,9 +76,9 @@ if idle_time > IDLE_LIMIT:
         "悩んでいる？ヒントをあげるよ"
     )
 
-    hint = get_hint(
-        problem,
-        code
+    st.session_state.hint = get_hint(
+    problem,
+    code
     )
 
-    st.info(hint)
+    st.info(st.session_state.hint)
