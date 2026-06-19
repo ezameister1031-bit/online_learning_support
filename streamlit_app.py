@@ -56,5 +56,3 @@ if idle_time > IDLE_LIMIT:
     )
 
     st.info(hint)
-st.write("last_code =", repr(st.session_state.last_code))
-st.write("code =", repr(code))
