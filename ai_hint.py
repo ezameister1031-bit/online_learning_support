@@ -5,7 +5,7 @@ OLLAMA_URL = "https://dominoes-perish-plant.ngrok-free.dev"
 def get_hint(problem, code):
 
     prompt = f"""
-あなたはプログラミング学習支援AIです。
+あなたはプログラミング講師です。
 答えは出さずヒントのみ出してください。
 
 問題:
@@ -15,13 +15,20 @@ def get_hint(problem, code):
 {code}
 """
 
-    res = requests.post(
-        f"{OLLAMA_URL}/api/generate",
-        json={
-            "model": "llama3",
-            "prompt": prompt,
-            "stream": False
-        }
-    )
+    try:
+        res = requests.post(
+            f"{OLLAMA_URL}/api/generate",
+            json={
+                "model": "llama3",
+                "prompt": prompt,
+                "stream": False
+            },
+            timeout=30
+        )
 
-    return res.json()["response"]
+        data = res.json()
+
+        return data.get("response", "AIからの応答がありません")
+
+    except Exception as e:
+        return f"エラー: {str(e)}"
