@@ -49,7 +49,7 @@ st.write(f"停止時間: {int(idle_time)}秒")
 # 自動ヒント
 # =========================
 
-IDLE_LIMIT = 300
+IDLE_LIMIT = 30
 
 if idle_time > IDLE_LIMIT:
     st.warning("悩んでいる？ヒントをあげるよ")
