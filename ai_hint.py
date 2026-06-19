@@ -35,5 +35,5 @@ def get_hint(problem, code):
 
     return data.get("response", "AIからの応答がありません")
 
-except Exception as e:
-    return f"エラー: {str(e)}"
+    except Exception as e:
+        return f"エラー: {str(e)}"
