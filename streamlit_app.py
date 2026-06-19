@@ -1,5 +1,7 @@
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 
+st_autorefresh(interval=1000, key="idle_check")
 st.title("Python学習支援システム")
 
 problem = st.text_area(
