@@ -4,12 +4,7 @@ import io
 import contextlib
 
 
-if "auto_hint_given" not in st.session_state:
-    st.session_state.auto_hint_given = False
-if code != st.session_state.last_code:
-    st.session_state.last_code = code
-    st.session_state.last_time = time.time()
-    st.session_state.auto_hint_given = False
+
 st_autorefresh(interval=1000, key="idle_check")
 st.title("Python学習支援システム")
 
@@ -80,7 +75,12 @@ st.write(
 )
 
 IDLE_LIMIT = 30
-
+if "auto_hint_given" not in st.session_state:
+    st.session_state.auto_hint_given = False
+if code != st.session_state.last_code:
+    st.session_state.last_code = code
+    st.session_state.last_time = time.time()
+    st.session_state.auto_hint_given = False
 if idle_time > IDLE_LIMIT:
 
     st.warning(
