@@ -48,6 +48,9 @@ from ai_hint import get_hint
 
 if st.button("ヒントをもらう"):
     st.session_state.hint = get_hint(problem, code)
+
+st.write("DEBUG:", repr(st.session_state.hint))
+
 if st.session_state.hint:
     st.info(st.session_state.hint)
 import time
