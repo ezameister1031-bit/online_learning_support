@@ -23,7 +23,7 @@ code = st_ace(
 from ai_hint import get_hint
 
 if st.button("ヒントをもらう"):
-    #hint = get_hint(problem, code)
+    hint = get_hint(problem, code)
 
     st.write(hint)
 
@@ -58,4 +58,4 @@ if idle_time > IDLE_LIMIT:
         code
     )
 
-    #st.info(hint)
+    st.info(hint)
