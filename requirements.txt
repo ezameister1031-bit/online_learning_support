@@ -1,4 +1,4 @@
 streamlit
-openai
-python-dotenv
 streamlit-ace
+streamlit-autorefresh
+requests
