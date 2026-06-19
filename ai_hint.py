@@ -16,19 +16,24 @@ def get_hint(problem, code):
 """
 
     try:
-        res = requests.post(
-            f"{OLLAMA_URL}/api/generate",
-            json={
-                "model": "llama3",
-                "prompt": prompt,
-                "stream": False
-            },
-            timeout=30
-        )
+    res = requests.post(
+        f"{OLLAMA_URL}/api/generate",
+        json={
+            "model": "llama3",
+            "prompt": prompt,
+            "stream": False
+        },
+        timeout=30
+    )
 
-        data = res.json()
+    st = res.status_code
+    print("status =", st)
+    print("response text =", res.text)
 
-        return data.get("response", "AIからの応答がありません")
+    data = res.json()
+    return str(data)
 
-    except Exception as e:
-        return f"エラー: {str(e)}"
+    return data.get("response", "AIからの応答がありません")
+
+except Exception as e:
+    return f"エラー: {str(e)}"
