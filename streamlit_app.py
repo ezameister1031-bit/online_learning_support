@@ -42,7 +42,7 @@ st.subheader("実行結果")
 if st.session_state.run_output:
     st.code(st.session_state.run_output)
 from ai_hint import get_hint
-
+hint = ""
 if st.button("ヒントをもらう"):
     hint = get_hint(problem, code)
 
