@@ -29,7 +29,8 @@ def get_hint(problem, code):
         st = res.status_code
         print("status =", st)
         print("response text =", res.text)
-    
+        print("RAW:", res.text)
+        print("STATUS:", res.status_code)
         data = res.json()
         return str(data)
 
@@ -37,5 +38,4 @@ def get_hint(problem, code):
 
     except Exception as e:
         return f"エラー: {str(e)}"
-print("RAW:", res.text)
-print("STATUS:", res.status_code)
+
