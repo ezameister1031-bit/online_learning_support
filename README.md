@@ -66,17 +66,29 @@ pip install streamlit requests streamlit-ace
 
 (https://ollama.com/)
 
-### 3. モデルの実行(ターミナルで実行)
+### 3. モデルの実行(ターミナルで実行)（1度だけでいい）
 
 ```bash
 ollama run llama3
 ```
 
 ### 4. ngrokのインストール（外部アクセス用）
+以下からインストール：
+
+(https://ngrok.com/)
+### 5. ngrokの実行（ターミナルで実行・アプリ使用の際実行必須）
+
+```bash
 ngrok http 11434 --host-header="localhost:11434"
-5. Streamlitアプリの起動
+```
+
+### 6. Streamlitアプリの起動
+```bash
 streamlit run streamlit_app.py
-🔌 システム構成
+```
+---
+## 🔌 システム構成
+```text
 Streamlit（UI）
    ↓
 Pythonコード
@@ -86,32 +98,45 @@ ngrok（トンネル）
 Ollama（ローカルLLM）
    ↓
 ヒント生成
-🧩 ファイル構成
-ファイル名	内容
-streamlit_app.py	メインUI
-ai_hint.py	Ollamaとの通信処理
-requirements.txt	依存ライブラリ
-(ngrok)	外部公開用トンネル
-🧠 AIヒントの仕組み
+```
+---
+## 🧩 ファイル構成
+| ファイル名        | 内容　　           |
+| ------------- | --------------- |
+|streamlit_app.py|	メインUI|
+|ai_hint.py|	Ollamaとの通信処理|
+|requirements.txt|	依存ライブラリ|
+|(ngrok)	|外部公開用トンネル|
+
+---
+
+## 🧠 AIヒントの仕組み
 
 AIには以下の制約を与えています：
 
-正解コードを出さない
-解説ではなく「気づき」を与える
-次に考えるべき方向性を提示
-💻 使用技術
-Python
-Streamlit（UI）
-Ollama（ローカルLLM）
-ngrok（外部公開）
-requests（API通信）
-🚀 今後のロードマップ
-手詰まり検知の自動化（無操作検出）
-ヒントレベル（Lv1〜Lv3）の導入
-コード実行結果との連動
-学習履歴の保存機能
-複数モデル比較（llama3 / mistral / phi3）
-🧠 このプロジェクトの特徴
+- 正解コードを出さない
+- 解説ではなく「気づき」を与える
+- 次に考えるべき方向性を提示
+---
+
+## 💻 使用技術
+* **Python**
+* **Streamlit（UI）**(https://streamlit.io/)
+* **Ollama（ローカルLLM）**(https://ollama.com/)
+* **ngrok（外部公開）**(https://ngrok.com/)
+* **requests（API通信）**
+
+---
+
+## 🚀 今後のロードマップ
+- 手詰まり検知の自動化（無操作検出）
+- ヒントレベル（Lv1〜Lv3）の導入
+- コード実行結果との連動
+- 学習履歴の保存機能
+- 複数モデル比較（llama3 / mistral / phi3）
+
+---
+## 🧠 このプロジェクトの特徴
 
 このアプリは単なるチャットAIではなく、
 
