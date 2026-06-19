@@ -48,27 +48,31 @@ Streamlit を使用して作成した、
 ---
 
 ## 🛠 セットアップ方法
-#### 1. 必要なライブラリのインストール
+### 1. 必要なライブラリのインストール
 Python環境がインストールされていることを確認し、必要なライブラリをインストールして下さい
 ```bash
-pip install streamlit requests
+pip install streamlit requests streamlit-ace
 ```
-2. Ollamaのインストール
+#### 役割
+| ライブラリ         | 用途              |
+| ------------- | --------------- |
+| streamlit     | UI（画面全体）        |
+| requests      | OllamaへAPI通信    |
+| streamlit-ace | コードエディタ（st_ace） |
+
+### 2. Ollamaのインストール
 
 以下からインストール：
 
-https://ollama.com/
+(https://ollama.com/)
 
-3. モデルの準備
+### 3. モデルの実行(ターミナルで実行)
 
-例：
-
+```bash
 ollama run llama3
+```
 
-または
-
-ollama run mistral
-4. ngrokの起動（外部アクセス用）
+### 4. ngrokのインストール（外部アクセス用）
 ngrok http 11434 --host-header="localhost:11434"
 5. Streamlitアプリの起動
 streamlit run streamlit_app.py
