@@ -22,9 +22,10 @@ code = st_ace(
 )
 
 # ヒントボタン
-if st.button("ヒントをもらう"):
-    hint = get_hint(problem, code)
-    st.write(hint)
+with st.form("hint_form"):
+    submitted = st.form_submit_button("ヒントをもらう")
+    if submitted:
+        st.write(get_hint(problem, code))
 
 # =========================
 # 停止時間の計測
