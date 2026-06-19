@@ -7,10 +7,7 @@ problem = st.text_area(
     height=200
 )
 
-code = st.text_area(
-    "コード",
-    height=300
-)
+st.write("コード")
 
 from streamlit_ace import st_ace
 
