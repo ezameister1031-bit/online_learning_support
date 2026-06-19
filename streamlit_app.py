@@ -1,11 +1,7 @@
 import streamlit as st
-from streamlit_autorefresh import st_autorefresh
 import io
 import contextlib
 
-
-
-st_autorefresh(interval=1000, key="idle_check")
 st.title("Python学習支援システム")
 
 problem = st.text_area(
@@ -50,54 +46,8 @@ from ai_hint import get_hint
 if st.button("ヒントをもらう"):
     st.session_state.hint = get_hint(problem, code)
 
-st.write("DEBUG:", repr(st.session_state.hint))
-
 if st.session_state.hint:
     st.info(st.session_state.hint)
-import time
-if "last_code" not in st.session_state:
-    st.session_state.last_code = ""
-    st.session_state.last_time = time.time()
 
-if "auto_hint_given" not in st.session_state:
-    st.session_state.auto_hint_given = False
-
-if code != st.session_state.last_code:
-
-    st.session_state.last_code = code
-    st.session_state.last_time = time.time()
-    st.session_state.auto_hint_given = False
-idle_time = (
-    time.time()
-    - st.session_state.last_time
-)
-
-st.write(
-    f"停止時間: {int(idle_time)}秒"
-)
 
 IDLE_LIMIT = 30
-if idle_time > IDLE_LIMIT:
-
-    st.warning("悩んでいる？ヒントをあげるよ")
-
-    st.write(
-        "auto_hint_given:",
-        st.session_state.auto_hint_given
-    )
-
-    if not st.session_state.auto_hint_given:
-
-        st.write("get_hint 呼び出し")
-
-        st.session_state.hint = get_hint(
-            problem,
-            code
-        )
-
-        st.session_state.auto_hint_given = True
-
-if st.session_state.hint:
-    st.info(st.session_state.hint)
-st.write("auto_hint_given =", st.session_state.auto_hint_given)
-st.write("last_code == code ?", code == st.session_state.last_code)
