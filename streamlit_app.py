@@ -44,10 +44,37 @@ if st.session_state.run_output:
 from ai_hint import get_hint
 
 if st.button("ヒントをもらう"):
-    st.session_state.hint = get_hint(problem, code)
+    hint = get_hint(problem, code)
 
-if st.session_state.hint:
-    st.info(st.session_state.hint)
+    st.write(hint)
 
 
+import time
+
+if "last_code" not in st.session_state:
+    st.session_state.last_code = ""
+    st.session_state.last_time = time.time()
+if code != st.session_state.last_code:
+
+    st.session_state.last_code = code
+    st.session_state.last_time = time.time()
+idle_time = (
+    time.time()
+    - st.session_state.last_time
+)
+st.write(
+    f"停止時間: {int(idle_time)}秒"
+)
 IDLE_LIMIT = 30
+if idle_time > IDLE_LIMIT:
+
+    st.warning(
+        "悩んでいる？ヒントをあげるよ"
+    )
+
+    hint = get_hint(
+        problem,
+        code
+    )
+
+    st.info(hint)
