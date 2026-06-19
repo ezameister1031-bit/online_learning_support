@@ -60,11 +60,14 @@ if "last_code" not in st.session_state:
     st.session_state.last_code = ""
     st.session_state.last_time = time.time()
 
+if "auto_hint_given" not in st.session_state:
+    st.session_state.auto_hint_given = False
+
 if code != st.session_state.last_code:
 
     st.session_state.last_code = code
     st.session_state.last_time = time.time()
-
+    st.session_state.auto_hint_given = False
 idle_time = (
     time.time()
     - st.session_state.last_time
@@ -75,19 +78,18 @@ st.write(
 )
 
 IDLE_LIMIT = 30
-if "auto_hint_given" not in st.session_state:
-    st.session_state.auto_hint_given = False
-if code != st.session_state.last_code:
-    st.session_state.last_code = code
-    st.session_state.last_time = time.time()
-    st.session_state.auto_hint_given = False
 if idle_time > IDLE_LIMIT:
 
-    st.warning(
-        "悩んでいる？ヒントをあげるよ"
+    st.warning("悩んでいる？ヒントをあげるよ")
+
+    st.write(
+        "auto_hint_given:",
+        st.session_state.auto_hint_given
     )
 
     if not st.session_state.auto_hint_given:
+
+        st.write("get_hint 呼び出し")
 
         st.session_state.hint = get_hint(
             problem,
@@ -98,3 +100,5 @@ if idle_time > IDLE_LIMIT:
 
 if st.session_state.hint:
     st.info(st.session_state.hint)
+st.write("auto_hint_given =", st.session_state.auto_hint_given)
+st.write("last_code == code ?", code == st.session_state.last_code)
