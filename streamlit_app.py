@@ -3,6 +3,20 @@ import time
 from streamlit_ace import st_ace
 from ai_hint import get_hint
 
+import io
+import contextlib
+
+def run_code(code):
+    output = io.StringIO()
+
+    try:
+        with contextlib.redirect_stdout(output):
+            exec(code)
+
+        return output.getvalue()
+
+    except Exception as e:
+        return f"エラー:\n{e}"
 st.title("Python学習支援システム")
 
 # 問題入力
@@ -20,7 +34,11 @@ code = st_ace(
     height=400,
     key="code_editor"
 )
+if st.button("コードを実行"):
+    result = run_code(code)
 
+    st.subheader("実行結果")
+    st.code(result)
 # ヒントボタン
 with st.form("hint_form"):
     submitted = st.form_submit_button("ヒントをもらう")
