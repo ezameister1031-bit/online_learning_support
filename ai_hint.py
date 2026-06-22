@@ -1,34 +1,42 @@
-import requests
+import google.generativeai as genai
+import streamlit as st
 
-OLLAMA_URL = "https://dominoes-perish-plant.ngrok-free.dev"
+genai.configure(
+    api_key=st.secrets["GEMINI_API_KEY"]
+)
+
+model = genai.GenerativeModel(
+    "gemini-2.5-flash"
+)
 
 def get_hint(problem, code):
 
     prompt = f"""
-あなたはプログラミング講師です。
-答えは出さずヒントのみ出してください。
+あなたは優秀なPython講師です。
+
+以下のルールを必ず守ってください。
+
+【ルール】
+・答えを書かない
+・完成コードを書かない
+・考えるヒントだけ出す
+・初心者向けに説明する
+・次に確認すべきポイントを教える
 
 問題:
 {problem}
 
-コード:
+学習者のコード:
 {code}
 """
 
     try:
-        res = requests.post(
-            f"{OLLAMA_URL}/api/generate",
-            json={
-                "model": "llama3",
-                "prompt": prompt,
-                "stream": False
-            },
-            timeout=30
+
+        response = model.generate_content(
+            prompt
         )
 
-        data = res.json()
-
-        return data.get("response", "AIからの応答がありません")
+        return response.text
 
     except Exception as e:
-        return f"エラー: {str(e)}"
+        return f"エラー: {e}"
